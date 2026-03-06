@@ -1,4 +1,4 @@
-import { Footer, Hero } from "../../components";
+import { Footer, Hero, Product } from "../../components";
 import { client } from "../../sanity/client";
 
 
@@ -12,11 +12,8 @@ export default function Home({ products, bannerData }) {
       </div>
       <div className="products-container">
         {/* <Product /> */}
-        {products?.map((product, index) => (
-          <div key={index} className="product-card">
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-          </div>
+        {products?.map((product) => (
+          <Product key={product._id} product={product} />
         ))}
       </div>
       <Footer />
