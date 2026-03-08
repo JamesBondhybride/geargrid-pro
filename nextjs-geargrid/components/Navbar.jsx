@@ -7,12 +7,12 @@ function Navbar() {
     <div className="navbar-container">
       <p className="logo">
         <Link href={'/'}>
-          GearGrid
+          <img src="/logo.png" alt="GearGrid" width={120} height={30} />
         </Link>
       </p>
       <button type="button" className="cart-icon" onClick={() => {}}>
-        <AiOutlineShopping />
         <span className="cart-item-qty">0</span>
+        <AiOutlineShopping />
       </button>
     </div>
   );
