@@ -1,11 +1,11 @@
-import { Footer, Hero, Product } from "../../components";
+import { Footer, FooterBanner, Hero, Product } from "../../components";
 import { client } from "../../sanity/client";
 
 
 export default function Home({ products, bannerData }) {
   return (
     <div>
-      <Hero herobanner={bannerData.length && bannerData[0]}/>
+      <Hero herobanner={bannerData.length && bannerData[1]}/>
       <div className="products-heading">
           <h2>Best Selling Products</h2>
           <p>Speaker There are many variations passages of Lorem Ipsum available.</p>
@@ -16,7 +16,7 @@ export default function Home({ products, bannerData }) {
           <Product key={product._id} product={product} />
         ))}
       </div>
-      <Footer />
+      <FooterBanner footerBanner={bannerData.length && bannerData[0]} />
     </div>
   );
 }
