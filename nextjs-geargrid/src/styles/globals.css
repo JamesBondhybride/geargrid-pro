@@ -325,6 +325,11 @@ text-align: end;
   color: #f02d34;
 }
 .empty-cart{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   margin:40px;
   text-align:center;
 }
@@ -527,7 +532,6 @@ padding: 30px 65px;
   transform:scale(1.1,1.1)
 }
 .quantity-desc{
-  border: 1px solid gray;
 padding: 6px;
 }
 .quantity-desc span{
@@ -536,11 +540,9 @@ padding: 6px;
   cursor: pointer;
 }
 .quantity-desc .minus{
-  border-right: 1px solid gray;
   color: #f02d34;
 }
 .quantity-desc .num{
-  border-right: 1px solid gray;
   font-size: 20px;
 }
 .quantity-desc .plus{
