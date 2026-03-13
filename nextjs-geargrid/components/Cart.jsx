@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import {
   AiOutlineMinus,
@@ -10,10 +10,42 @@ import toast from "react-hot-toast";
 import { urlFor } from "sanity/client";
 import { useStateContext } from "context/StateContext";
 import Link from "next/link";
+import getStripe from "lib/getStripe";
+
+
 function Cart() {
+  const [loading, setLoading] = useState(false);
   const cartRef = useRef();
   const { cartItems, setShowCart, totalPrice, totalQuantities, toggleCartItemQuantity, onRemove } =
     useStateContext();
+  
+const handleCheckout = async () => {
+  setLoading(true);
+  const response = await fetch("/api/stripe", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ cartItems }),
+  });
+
+  if (response.status === 500) {
+    console.error("Server error:", await response.text());
+    toast.error("An error occurred while creating the checkout session.");
+    setLoading(false);
+    return;
+  }
+
+  const data = await response.json();
+  if (data.url) {
+    toast.loading("Redirecting to checkout...");
+    window.location.href = data.url; // ✅ Direct redirect to Stripe Checkout
+  } else {
+    toast.error("Failed to create checkout session.");
+  }
+  setLoading(false);
+};
+
+
+
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
@@ -78,7 +110,7 @@ function Cart() {
               <h3>${totalPrice.toFixed(2)}</h3>
             </div>
             <div className="btn-container">
-              <button type="button" className="btn">
+              <button type="button" className="btn" onClick={handleCheckout}>
                 Checkout
               </button>
             </div>
