@@ -10,7 +10,6 @@ import toast from "react-hot-toast";
 import { urlFor } from "sanity/client";
 import { useStateContext } from "context/StateContext";
 import Link from "next/link";
-import getStripe from "lib/getStripe";
 
 
 function Cart() {
@@ -43,8 +42,6 @@ const handleCheckout = async () => {
   }
   setLoading(false);
 };
-
-
 
   return (
     <div className="cart-wrapper" ref={cartRef}>
